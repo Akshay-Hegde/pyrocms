@@ -3,6 +3,14 @@
  * A base model with a series of CRUD functions (powered by CI's query builder),
  * validation-in-model support, event callbacks and more.
  *
+ * Following functions where changed/added to accomodate stuff PyroCMS excepts/uses:
+ *
+ * - __contruct() : registers events in the observer arrays with PyroCMS Events library
+ * - __call : for calling ci_model standard functions like select
+ * - trigger: updated to trigger PyroCMS events
+ * - validate: updated with changes from previous PyroCMS MY_Model version
+ * - register_event_handler: registers events with PyroCMS Events library
+ *
  * @link http://github.com/jamierumbelow/codeigniter-base-model
  * @copyright Copyright (c) 2012, Jamie Rumbelow <http://jamierumbelow.net>
  */
