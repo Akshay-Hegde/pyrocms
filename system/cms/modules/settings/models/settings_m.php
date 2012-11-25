@@ -12,6 +12,16 @@
 
 class Settings_m extends MY_Model {
 
+	protected $before_get = array('before_get_settings');
+	protected $primary_key = 'slug';
+
+	public function before_get_settings()
+	{
+		$this
+			->select('*, IF(`value` = "", `default`, `value`) as `value`', false)
+			->order_by('`order`', 'DESC');
+	}
+
 	/**
 	 * Get
 	 *
@@ -29,11 +39,7 @@ class Settings_m extends MY_Model {
 			$where = array('slug' => $where);
 		}
 
-		return $this->db
-			->select('*, IF(`value` = "", `default`, `value`) as `value`', false)
-			->where($where)
-			->get($this->_table)
-			->row();
+		return $this->get_by($where);
 	}
 
 	/**
@@ -53,27 +59,7 @@ class Settings_m extends MY_Model {
 			$where = array('module' => $where);
 		}
 
-		$this->db
-			->select('*, IF(`value` = "", `default`, `value`) as `value`', false)
-			->where($where)
-			->order_by('`order`', 'DESC');
-		
-		return $this->get_all();
-	}
-
-	/**
-	 * Update
-	 *
-	 * Updates a setting for a given $slug.
-	 *
-	 * @access	public
-	 * @param	string	$slug
-	 * @param	array	$params
-	 * @return	bool
-	 */
-	public function update($slug = '', $params = array(), $skip_validation = false)
-	{
-		return $this->db->update($this->_table, $params, array('slug' => $slug));
+		return parent::get_many_by($where);
 	}
 
 	/**
@@ -100,7 +86,6 @@ class Settings_m extends MY_Model {
 
 		return $result;
 	}
-
 }
 
 /* End of file settings_m.php */
