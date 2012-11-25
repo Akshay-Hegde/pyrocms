@@ -17,13 +17,18 @@ section.center .no_data { margin: 40px 20px 20px 20px; }
 #folders-sidebar li.close > div { background: url(../img/glyphicons-halflings-gray.png) no-repeat -313px -117px; }
 #folders-sidebar li.current { background: url(../img/current.png) no-repeat 98% 6px; }
 
+.folders-center .file-list-info {
+    color: #515151;
+    font-size: 11px;
+}
+
 .folders-center { height: 450px; overflow-y: auto; overflow-x: hidden; }
 .folders-center li:hover { background-color: #ededed; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
 .folders-center .folder { width: 100px; height: 112px; margin: 10px; overflow: hidden; float: left; background: url(../img/folder.png) no-repeat; }
-.folders-center li .name-text { display: block; margin: 0 4px 0 4px; color: #515151; font-size: 11px; height: 15px; overflow: hidden; margin-top: 80px; text-align: center; cursor: default; }
+.folders-center li .name-text { display: block; margin: 0 4px 0 4px; height: 15px; overflow: hidden; margin-top: 80px; text-align: center; cursor: default; }
 .folders-center li .name-text input { width: 92px; margin: 0; padding: 0; background: transparent; border: none; margin: 0; padding: 0; text-align: center; }
 
-.folders-center .file { width: 100px; height: 112px; margin: 10px; overflow: hidden; float: left; }
+.folders-center .file { width: 100px; height: 112px; margin: 10px; overflow: hidden; float: left; background-repeat: no-repeat; }
 .folders-center .selected { background-color: #e0e0e0; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
 .folders-center .file .name-text { margin-top: 83px; cursor: default; }
 .folders-center .file.type-a { background-image: url(../img/a.png); }
@@ -32,6 +37,40 @@ section.center .no_data { margin: 40px 20px 20px 20px; }
 .folders-center .file.type-v { background-image: url(../img/v.png); }
 .folders-center .file.type-i .name-text { margin-top: 7px; }
 .folders-center .file.type-i img { padding: 25px 13px 0 13px; }
+
+.folders-center.list .file-list-info  .name-text {
+    margin: 0;
+    text-align: left;
+}
+
+.folders-center.list .file-list-info {
+    display: block;
+    float: left;
+    width: 60%;
+    border: 1px solid black;
+
+    margin: 15px 0 0 100px;
+}
+
+.folders-center.list .file.type-i .file-list-info {
+    margin-left: 0;
+}
+
+.display-option { float: right; }
+.folders-center.list li { display: block; width: 45%; float: left; }
+.folders-center.list .file.type-i img { float: left; }
+
+.folders-center.grid .file-list-info span {
+   display: none;
+}
+
+.folders-center.grid .file-list-info span.name-text {
+    display: block;
+}
+
+.folders-center.list .file-list-info span {
+   display: block;
+}
 
 #item-details h4 { margin: 0 0 10px; }
 #item-details li { font-size: 14px; list-style: none; line-height: 26px; }

@@ -1,5 +1,9 @@
 <section class="title">
 	<h4><?php echo lang('files:files_title'); ?></h4>
+	<div class="display-option">
+		Display as : <input type="radio" name="display-as" value="grid" checked="checked"> Grid
+					 <input type="radio" name="display-as" value="list"> List
+	</div>
 </section>
 
 <section class="item">
@@ -19,7 +23,7 @@
 				<div class="no_data"><?php echo lang('files:no_folders'); ?></div>
 			<?php endif; ?>
 
-			<ul class="folders-center pane"></ul>
+			<ul class="folders-center pane grid"></ul>
 
 			<ul class="context-menu-source">
 				<li 							data-applies-to="folder" 			data-menu="open"><?php echo lang('files:open'); ?></li>
