@@ -45,12 +45,15 @@ $lang['files:search_message']				= 'Type en druk op Enter';
 $lang['files:search']						= 'Zoeken';
 $lang['files:synchronize']					= 'Synchroniseren';
 $lang['files:uploader']						= 'Plaats bestanden hier <br />of<br />Selecteer bestanden';
+$lang['files:replace_file']					= 'Replace file'; #translate
 
 // Context Menu
+$lang['files:refresh']						= 'Refresh'; #translate
 $lang['files:open']							= 'Open';
 $lang['files:new_folder']					= 'Nieuwe map';
 $lang['files:upload']						= 'Upload';
 $lang['files:rename']						= 'Hernoem';
+$lang['files:replace']	  					= 'Replace'; # translate
 $lang['files:delete']						= 'Verwijder';
 $lang['files:edit']							= 'Wijzig';
 $lang['files:details']						= 'Details';
@@ -95,6 +98,7 @@ $lang['files:file_moved']					= '"%s" is verplaatst';
 $lang['files:exceeds_server_setting']		= 'De server kan deze bestandsgrootte niet aan';
 $lang['files:exceeds_allowed']				= 'Bestandsgrootte is te groot';
 $lang['files:file_type_not_allowed']		= 'Dit type bestand is niet toegestaan';
+$lang['files:replace_warning']				= 'Warning: Do not replace a file with a file of a different type (e.g. .jpg with .png)'; #translate
 $lang['files:type_a']						= 'Audio';
 $lang['files:type_v']						= 'Video';
 $lang['files:type_d']						= 'Document';

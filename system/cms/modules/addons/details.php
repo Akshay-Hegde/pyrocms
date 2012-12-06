@@ -33,7 +33,8 @@ class Module_Addons extends Module
 				'pl' => 'Rozszerzenia',
 				'ru' => 'Дополнения',
 				'sl' => 'Razširitve',
-				'zh' => '附加模組',
+				'tw' => '附加模組',
+				'cn' => '附加模组',
 				'hu' => 'Bővítmények',
 				'th' => 'ส่วนเสริม',
 				'se' => 'Tillägg',
@@ -58,7 +59,8 @@ class Module_Addons extends Module
 				'pl' => 'Umożliwiają administratorowi wgląd do listy obecnie zainstalowanych modułów.',
 				'ru' => 'Список модулей, которые установлены на сайте.',
 				'sl' => 'Dovoljuje administratorjem pregled trenutno nameščenih modulov.',
-				'zh' => '管理員可以檢視目前已經安裝模組的列表',
+				'tw' => '管理員可以檢視目前已經安裝模組的列表',
+				'cn' => '管理员可以检视目前已经安装模组的列表',
 				'hu' => 'Lehetővé teszi az adminoknak, hogy lássák a telepített modulok listáját.',
 				'th' => 'ช่วยให้ผู้ดูแลระบบดูรายการของโมดูลที่ติดตั้งในปัจจุบัน',
 				'se' => 'Gör det möjligt för administratören att se installerade mouler.',
@@ -78,30 +80,40 @@ class Module_Addons extends Module
 				),
 			),
 		);
-
+	
 		// Add upload options to various modules
-		if ( ! class_exists('Module_import') and Settings::get('addons_upload'))
+		if (Settings::get('addons_upload'))
 		{
 			$info['sections']['modules']['shortcuts'] = array(
 				array(
-					// @TODO
 					'name' => 'global:upload',
 					'uri' => 'admin/addons/modules/upload',
-					'class' => 'add modal',
+					'class' => 'add',
 				),
 			);
 
 			$info['sections']['themes']['shortcuts'] = array(
 				array(
-					// @TODO
 					'name' => 'global:upload',
 					'uri' => 'admin/addons/themes/upload',
-					'class' => 'add modal',
+					'class' => 'add',
 				),
 			);
 		}
 
 		return $info;
+	}
+
+	public function admin_menu(&$menu)
+	{
+		$menu['lang:cp_nav_addons'] = array(
+			'lang:cp_nav_modules'			=> 'admin/addons',
+			'lang:global:plugins'			=> 'admin/addons/plugins',
+			'lang:global:widgets'			=> 'admin/addons/widgets',
+			'lang:global:fieldtypes'		=> 'admin/addons/fieldtypes'
+		);
+
+		add_admin_menu_place('lang:cp_nav_addons', 6);
 	}
 
 	public function install()
@@ -123,7 +135,62 @@ class Module_Addons extends Module
 			),
 		);
 
-		return $this->install_tables($tables);
+		if ( ! $this->install_tables($tables)) {
+			return false;
+		}
+
+		// Install settings
+		$settings = array(
+			array(
+				'slug' => 'addons_upload',
+				'title' => 'Addons Upload Permissions',
+				'description' => 'Keeps mere admins from uploading addons by default',
+				'type' => 'text',
+				'default' => '0',
+				'value' => '0',
+				'options' => '',
+				'is_required' => 1,
+				'is_gui' => 0,
+				'module' => '',
+				'order' => 0,
+			),
+			array(
+				'slug' => 'default_theme',
+				'title' => 'Default Theme',
+				'description' => 'Select the theme you want users to see by default.',
+				'type' => '',
+				'default' => 'default',
+				'value' => 'default',
+				'options' => 'func:get_themes',
+				'is_required' => 1,
+				'is_gui' => 0,
+				'module' => '',
+				'order' => 0,
+			),
+			array(
+				'slug' => 'admin_theme',
+				'title' => 'Control Panel Theme',
+				'description' => 'Select the theme for the control panel.',
+				'type' => '',
+				'default' => '',
+				'value' => 'pyrocms',
+				'options' => 'func:get_themes',
+				'is_required' => 1,
+				'is_gui' => 0,
+				'module' => '',
+				'order' => 0,
+			),
+		);
+
+		foreach ($settings as $setting)
+		{
+			if ( ! $this->db->insert('settings', $setting))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public function uninstall()
