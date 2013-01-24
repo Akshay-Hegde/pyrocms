@@ -677,9 +677,9 @@ class Files
 	public static function get_file($identifier = 0)
 	{
 		// they could have specified the row id or the actual filename
-		$column = (strlen($identifier) === 15 and strpos($identifier, '.') === false) ? 
-					'files.id' : 
-					'filename';
+		$column = (strlen($identifier) === 15 and strpos($identifier, '.') === true) ? 
+					'filename' :
+					'files.id';
 
 		$results = ci()->file_m->select('files.*, file_folders.name folder_name, file_folders.slug folder_slug')
 			->join('file_folders', 'file_folders.id = files.folder_id')
